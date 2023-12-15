@@ -26,3 +26,15 @@ export type MemberType = {
     status: string,
     roleId: string
 }
+
+//Membership type
+export type ApplyCard = {
+    cardId:string,
+    memberId:string
+}
+//Recharge type
+export type Recharge = {
+    memberId:string,
+    money:number,
+    userId:string
+}

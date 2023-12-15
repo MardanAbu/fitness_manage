@@ -60,12 +60,13 @@ const routes: Array<RouteRecordRaw> = [
       },
     ]
   },
+  
   {
     path: "/memberRoot",
     component: Layout,
     name: "memberRoot",
     meta: {
-      title: "Members",
+      title: "Member Management",
       icon: "Setting",
       roles: ["sys:memberRoot"],
     },
@@ -101,7 +102,42 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
     ],
-  }
+  },
+
+  {
+    path: "/courseRoot",
+    component: Layout,
+    name: "courseRoot",
+    meta: {
+      title: "Course Management",
+      icon: "Setting",
+      roles: ["sys:courseRoot"],
+    },
+    children: [
+      {
+        path: "/courseList",
+        component: () => import('@/views/course/CourseList.vue'),
+        name: "cardType",
+        meta: {
+          title: "Course List",
+          icon: "UserFilled",
+          roles: ["sys:courseList"],
+        },
+      },
+      {
+        path: "/mycourse",
+        component: () => import('@/views/mycourse/MyCourse.vue'),
+        name: "mycourse",
+        meta: {
+          title: "My Course",
+          icon: "Wallet",
+          roles: ["sys:mycourse"],
+        },
+      },
+      
+    ],
+  },
+
 ]
 
 const router = createRouter({

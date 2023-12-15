@@ -167,6 +167,14 @@ const addModel = reactive<MemberType>({
 
 //表单验证
 const rules = reactive({
+    roleId:[
+        {
+            required: true,
+            trigger: "change",
+            message: "Choose a role",
+        },
+    ],
+
     name: [
         {
             required: true,

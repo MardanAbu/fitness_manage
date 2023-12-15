@@ -1,5 +1,5 @@
 import http from "@/http"
-import { MemberParm, MemberType } from "./MemberModel"
+import { ApplyCard, MemberParm, MemberType, Recharge } from "./MemberModel"
 
 //Create
 export const addApi = (parm:MemberType)=>{
@@ -24,4 +24,19 @@ export const deleteApi = (memberId:string)=>{
 //Search role id by member id
 export const getRoleByMemberIdApi = (memberId:string)=>{
     return http.get("/api/member/getRoleByMemberId",{memberId:memberId})
+}
+
+//Purcahse membership
+export const applySaveApi = (parm:ApplyCard)=>{
+    return http.post("/api/member/joinApply",parm) 
+}
+
+//Recharge
+export const rechargeApi = (parm:Recharge)=>{
+    return http.post("/api/member/recharge",parm)
+}
+
+//Membership list
+export const getCardListApi = ()=>{
+    return http.get("/api/member/getCardList")
 }

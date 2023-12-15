@@ -74,7 +74,7 @@ let menuList = reactive([
         name: "memberRoot",
         meta: {
             title: "Member Management",
-            icon: "Setting",
+            icon: "Stamp",
             roles: ["sys:memberRoot"],
         },
         children: [
@@ -93,7 +93,7 @@ let menuList = reactive([
                 component: "/member/list/MemberList",
                 name: "memberList",
                 meta: {
-                    title: "Member Management",
+                    title: "Members",
                     icon: "Wallet",
                     roles: ["sys:memberList"],
                 },
@@ -106,6 +106,39 @@ let menuList = reactive([
                     title: "Transactions",
                     icon: "Menu",
                     roles: ["sys:myFee"],
+                },
+            },
+        ],
+    },
+
+    {
+        path: "/courseRoot",
+        component: "Layout",
+        name: "courseRoot",
+        meta: {
+            title: "Course Management",
+            icon: "Setting",
+            roles: ["sys:courseRoot"],
+        },
+        children: [
+            {
+                path: "/courseList",
+                component: "/course/CourseList",
+                name: "courseList",
+                meta: {
+                    title: "Course List",
+                    icon: "UserFilled",
+                    roles: ["sys:courseList"],
+                },
+            },
+            {
+                path: "/mycourse",
+                component: "/mycourse/MyCourse",
+                name: "mycourse",
+                meta: {
+                    title: "My Course",
+                    icon: "Wallet",
+                    roles: ["sys:mycourse"],
                 },
             },
         ],
