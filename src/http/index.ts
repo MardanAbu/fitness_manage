@@ -4,9 +4,11 @@ import { ElMessage } from 'element-plus';
 //axios configuration
 const config = {
     //requested address by interface
-    baseURL:'http://localhost:8089',
-    timeout:10000
+    baseURL:process.env.BASE_API,
+    timeout:10000,
+    withCredentials: true //解决sesson不一致的问题
 }
+
 //return type
 export interface Result<T = any> {
     code: number,
@@ -127,6 +129,16 @@ class Http {
     delete<T = Result>(url:string) : Promise<T>{
         return this.instance.delete(url)
     }
+
+    //Image upload
+    upload<T = Result>(url: string, params?: object): Promise<T> {
+        return this.instance.post(url, params, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    }
 }
+
 //export tool
 export default new Http(config)

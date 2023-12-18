@@ -3,7 +3,7 @@
     <!-- searching bar -->
     <el-form :model="listParm" :inline="true" size="default">
       <el-form-item>
-        <el-input placeholder="Enter the name" v-model="listParm.roleName"></el-input>
+        <el-input placeholder="Enter a rolename" v-model="listParm.roleName"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="searchBtn" :icon="Search">Search</el-button>
@@ -20,6 +20,8 @@
         <template #default="scope">
           <el-button type="primary" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
           <el-button type="danger" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>
+          <el-button type="text" :icon="Edit" size="default" @click="assignBtn(scope.row)">Permission</el-button>
+
         </template>
       </el-table-column>
     </el-table>
@@ -30,9 +32,11 @@
     </el-pagination>
 
     <!-- Create,edit dialog -->
-    <role-add ref="addRef" @refresh="refresh">
+    <role-add ref="addRef" @refresh="refresh"> </role-add>
 
-    </role-add>
+    <!-- permission assignment -->
+    <assign-role ref="assignRoleRef"></assign-role>
+
   </el-main>
 </template>
 
@@ -41,11 +45,12 @@ import RoleAdd from './RoleAdd.vue';
 import { Search, Edit, Plus, Close, Delete } from '@element-plus/icons-vue';
 import useTable from "@/composables/role/useTable";
 import useRole from "@/composables/role/useRole";
+import AssignRole from './AssignRole.vue';
 
 //table control
 const { searchBtn, resetBtn, getList, listParm, tableList, sizeChange, currentChange, tableHeight, refresh } = useTable();
 //create, edit, delete
-const { addBtn, editBtn, deleteBtn, addRef } = useRole(getList);
+const { addBtn, editBtn, deleteBtn, addRef, assignRoleRef, assignBtn } = useRole(getList);
 </script>
 
 <style scoped></style>

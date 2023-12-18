@@ -1,5 +1,6 @@
 export type CourseListParm = {
     courseName:string,
+    teacherName:string,
     currentPage:number,
     pageSize:number,
     total:number

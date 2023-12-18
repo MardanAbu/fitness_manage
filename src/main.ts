@@ -15,6 +15,8 @@ import { createPinia } from 'pinia'
 
 //instantiate Pinia
 const pinia = createPinia()
+//使用持久化插件
+pinia.use(piniaPersist)
 
 //data confirm
 import myconfirm from './utils/myconfirm'
@@ -32,3 +34,8 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 //global mount
 app.config.globalProperties.$myconfirm =  myconfirm
 app.config.globalProperties.$objCopy =  objCopy
+
+import piniaPersist from 'pinia-plugin-persist'
+
+import './permission'
+

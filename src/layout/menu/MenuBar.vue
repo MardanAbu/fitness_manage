@@ -4,12 +4,16 @@
         <menu-item :menuList="menuList"></menu-item>
     </el-menu>
 </template>
+
 <script setup lang="ts">
 import { ref, reactive, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import MenuItem from '@/layout/menu/MenuItem.vue';
 import MenuLogo from '@/layout/menu/MenuLogo.vue';
 import { collapseStore } from "@/store/collapse/index";
+import { menuStore } from "@/store/menu";
+
+const mstore = menuStore()
 
 const colstore = collapseStore()
 
@@ -23,127 +27,202 @@ const activeIndex = computed(()=>{
     const {path} = route;
     return path;
 })
+
+//树形的菜单数据
+const menuList = computed(()=>{
+  return mstore.getMenuList
+})
+
 //reactive defines the response data(complex type, object)
 //ref defines(basic types) let count = ref(0)
-let menuList = reactive([
-    {
-        path: "/system",
-        component: "Layout",
-        name: "system",
-        meta: {
-            title: "System Management",
-            icon: "Setting",
-            roles: ["sys:manage"],
-        },
-        children: [
-            {
-                path: "/userList",
-                component: "/system/user/UserList",
-                name: "userList",
-                meta: {
-                    title: "Employee Managment",
-                    icon: "UserFilled",
-                    roles: ["sys:user"],
-                },
-            },
-            {
-                path: "/roleList",
-                component: "/system/role/RoleList",
-                name: "roleList",
-                meta: {
-                    title: "Role Management",
-                    icon: "Wallet",
-                    roles: ["sys:role"],
-                },
-            },
-            {
-                path: "/menuList",
-                component: "/system/menu/MenuList",
-                name: "menuList",
-                meta: {
-                    title: "Menu Management",
-                    icon: "Menu",
-                    roles: ["sys:menu"],
-                },
-            },
-        ],
-    },
-    {
-        path: "/memberRoot",
-        component: "Layout",
-        name: "memberRoot",
-        meta: {
-            title: "Member Management",
-            icon: "Stamp",
-            roles: ["sys:memberRoot"],
-        },
-        children: [
-            {
-                path: "/cardType",
-                component: "/member/type/CardType",
-                name: "cardType",
-                meta: {
-                    title: "Memberships",
-                    icon: "UserFilled",
-                    roles: ["sys:cardType"],
-                },
-            },
-            {
-                path: "/memberList",
-                component: "/member/list/MemberList",
-                name: "memberList",
-                meta: {
-                    title: "Members",
-                    icon: "Wallet",
-                    roles: ["sys:memberList"],
-                },
-            },
-            {
-                path: "/myFee",
-                component: "/system/FeeList",
-                name: "myFee",
-                meta: {
-                    title: "Transactions",
-                    icon: "Menu",
-                    roles: ["sys:myFee"],
-                },
-            },
-        ],
-    },
+// let menuList = reactive([
+//     {
+//         path: "/system",
+//         component: "Layout",
+//         name: "system",
+//         meta: {
+//             title: "System Management",
+//             icon: "Setting",
+//             roles: ["sys:manage"],
+//         },
+//         children: [
+//             {
+//                 path: "/userList",
+//                 component: "/system/user/UserList",
+//                 name: "userList",
+//                 meta: {
+//                     title: "Employee Managment",
+//                     icon: "UserFilled",
+//                     roles: ["sys:user"],
+//                 },
+//             },
+//             {
+//                 path: "/roleList",
+//                 component: "/system/role/RoleList",
+//                 name: "roleList",
+//                 meta: {
+//                     title: "Role Management",
+//                     icon: "Wallet",
+//                     roles: ["sys:role"],
+//                 },
+//             },
+//             {
+//                 path: "/menuList",
+//                 component: "/system/menu/MenuList",
+//                 name: "menuList",
+//                 meta: {
+//                     title: "Menu Management",
+//                     icon: "Menu",
+//                     roles: ["sys:menu"],
+//                 },
+//             },
+//         ],
+//     },
+//     {
+//         path: "/memberRoot",
+//         component: "Layout",
+//         name: "memberRoot",
+//         meta: {
+//             title: "Member Management",
+//             icon: "Stamp",
+//             roles: ["sys:memberRoot"],
+//         },
+//         children: [
+//             {
+//                 path: "/cardType",
+//                 component: "/member/type/CardType",
+//                 name: "cardType",
+//                 meta: {
+//                     title: "Memberships",
+//                     icon: "UserFilled",
+//                     roles: ["sys:cardType"],
+//                 },
+//             },
+//             {
+//                 path: "/memberList",
+//                 component: "/member/list/MemberList",
+//                 name: "memberList",
+//                 meta: {
+//                     title: "Members",
+//                     icon: "Wallet",
+//                     roles: ["sys:memberList"],
+//                 },
+//             },
+//             {
+//                 path: "/myFee",
+//                 component: "/system/FeeList",
+//                 name: "myFee",
+//                 meta: {
+//                     title: "Transactions",
+//                     icon: "Menu",
+//                     roles: ["sys:myFee"],
+//                 },
+//             },
+//         ],
+//     },
 
-    {
-        path: "/courseRoot",
-        component: "Layout",
-        name: "courseRoot",
-        meta: {
-            title: "Course Management",
-            icon: "Setting",
-            roles: ["sys:courseRoot"],
-        },
-        children: [
-            {
-                path: "/courseList",
-                component: "/course/CourseList",
-                name: "courseList",
-                meta: {
-                    title: "Course List",
-                    icon: "UserFilled",
-                    roles: ["sys:courseList"],
-                },
-            },
-            {
-                path: "/mycourse",
-                component: "/mycourse/MyCourse",
-                name: "mycourse",
-                meta: {
-                    title: "My Course",
-                    icon: "Wallet",
-                    roles: ["sys:mycourse"],
-                },
-            },
-        ],
-    },
-]);
+//     {
+//         path: "/courseRoot",
+//         component: "Layout",
+//         name: "courseRoot",
+//         meta: {
+//             title: "Course Management",
+//             icon: "ScaleToOriginal",
+//             roles: ["sys:courseRoot"],
+//         },
+//         children: [
+//             {
+//                 path: "/courseList",
+//                 component: "/course/CourseList",
+//                 name: "courseList",
+//                 meta: {
+//                     title: "Course List",
+//                     icon: "UserFilled",
+//                     roles: ["sys:courseList"],
+//                 },
+//             },
+//             {
+//                 path: "/mycourse",
+//                 component: "/mycourse/MyCourse",
+//                 name: "mycourse",
+//                 meta: {
+//                     title: "My Course",
+//                     icon: "Wallet",
+//                     roles: ["sys:mycourse"],
+//                 },
+//             },
+//         ],
+//     },
+
+//     {
+//         path: "/equipmentRoot",
+//         component: "Layout",
+//         name: "equipmentRoot",
+//         meta: {
+//             title: "Equipment Management",
+//             icon: "ScaleToOriginal",
+//             roles: ["sys:equipmentRoot"],
+//         },
+//         children: [
+//             {
+//                 path: "/equipmentList",
+//                 component: "/course/EquipmentList",
+//                 name: "equipmentList",
+//                 meta: {
+//                     title: "Equipment List",
+//                     icon: "UserFilled",
+//                     roles: ["sys:equipmentList"],
+//                 },
+//             },
+//         ],
+//     },
+
+//     {
+//         path: "/lostRoot",
+//         component: "Layout",
+//         name: "lostRoot",
+//         meta: {
+//             title: "Lost and Found",
+//             icon: "Setting",
+//             roles: ["sys:lostRoot"],
+//         },
+//         children: [
+//             {
+//                 path: "/lostList",
+//                 component: "/lost/LostList",
+//                 name: "lostRoot",
+//                 meta: {
+//                     title: "Lost List",
+//                     icon: "UserFilled",
+//                     roles: ["sys:lostRoot"],
+//                 },
+//             },
+//         ],
+//     },
+
+//     {
+//         path: "/suggestRoot",
+//         component: "Layout",
+//         name: "suggestRoot",
+//         meta: {
+//             title: "Feedback",
+//             icon: "Setting",
+//             roles: ["sys:suggestRoot"],
+//         },
+//         children: [
+//             {
+//                 path: "/suggestList",
+//                 component: "/suggest/SuggestList",
+//                 name: "suggestList",
+//                 meta: {
+//                     title: "Feedbacks",
+//                     icon: "UserFilled",
+//                     roles: ["sys:suggestList"],
+//                 },
+//             },
+//         ],
+//     },
+// ]);
 </script>
 <style scoped lang="scss">
 .el-menu-vertical-demo:not(.el-menu--collapse) {

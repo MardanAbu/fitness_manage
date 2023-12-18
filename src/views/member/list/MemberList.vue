@@ -60,9 +60,9 @@
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item :icon="ChatLineSquare" @click="rechargeBtn(scope.row)">充值</el-dropdown-item>
-                  <el-dropdown-item :icon="Edit" @click="editBtn(scope.row)">编辑</el-dropdown-item>
-                  <el-dropdown-item type="danger" :icon="Delete" @click="deleteBtn(scope.row)">删除</el-dropdown-item>
+                  <el-dropdown-item :icon="ChatLineSquare" @click="rechargeBtn(scope.row)">Recharge</el-dropdown-item>
+                  <el-dropdown-item :icon="Edit" @click="editBtn(scope.row)">Edit</el-dropdown-item>
+                  <el-dropdown-item type="danger" :icon="Delete" @click="deleteBtn(scope.row)">Delete</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>

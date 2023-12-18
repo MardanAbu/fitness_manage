@@ -8,6 +8,9 @@ import useInstance from "@/hooks/useInstance"
 
 export default function useRole(getList:FuncList) {
     const { global } = useInstance()
+
+    const assignRoleRef = ref<{ show: (roleId: string, name: string) => void }>()
+
     //ref attribute of creating dialog 
     const addRef = ref<{show:(type:string, row?:AddRoleModel) => void}>()
     //create
@@ -30,14 +33,21 @@ export default function useRole(getList:FuncList) {
                 //Refresh list
                 getList()
             }
-        }
-        
+        }   
     }
+
+    //Permission
+    const assignBtn = (row: AddRoleModel)=>{
+        assignRoleRef.value?.show(row.roleId, row.roleName)
+    }
+
     return {
         addBtn,
         editBtn,
         deleteBtn,
-        addRef
+        addRef,
+        assignRoleRef,
+        assignBtn
     }
 
 }
