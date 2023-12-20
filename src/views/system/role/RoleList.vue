@@ -8,7 +8,7 @@
       <el-form-item>
         <el-button @click="searchBtn" :icon="Search">Search</el-button>
         <el-button @click="resetBtn" plain :icon="Close" type="danger">Reset</el-button>
-        <el-button type="primary" :icon="Plus" @click="addBtn">Create</el-button>
+        <el-button type="primary" v-permission="['sys:role:add']" :icon="Plus" @click="addBtn">Create</el-button>
       </el-form-item>
     </el-form>
 
@@ -18,9 +18,9 @@
       <el-table-column prop="remark" label="remark"></el-table-column>
       <el-table-column label="action" width="220" align="center">
         <template #default="scope">
-          <el-button type="primary" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
-          <el-button type="danger" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>
-          <el-button type="text" :icon="Edit" size="default" @click="assignBtn(scope.row)">Permission</el-button>
+          <el-button type="primary" v-permission="['sys:role:edit']" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
+          <el-button type="danger" v-permission="['sys:role:delete']" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>
+          <el-button type="text" v-permission="['sys:role:permissions']" :icon="Edit" size="default" @click="assignBtn(scope.row)">Permission</el-button>
 
         </template>
       </el-table-column>

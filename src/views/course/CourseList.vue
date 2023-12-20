@@ -13,7 +13,7 @@
             <el-form-item>
                 <el-button :icon="Search" @click="searchBtn">Search</el-button>
                 <el-button :icon="Close" type="danger" @click="resetBtn">Reset</el-button>
-                <el-button :icon="Plus" type="primary" @click="addBtn">Add</el-button>
+                <el-button :icon="Plus" v-permission="['sys:courseList:add']" type="primary" @click="addBtn">Add</el-button>
             </el-form-item>
         </el-form>
 
@@ -30,8 +30,9 @@
             <el-table-column prop="teacherName" label="Coach"></el-table-column>
             <el-table-column label="Action" align="center" width="220">
                 <template #default="scope">
-                    <el-button type="primary" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
-                    <el-button type="danger" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>
+                    <el-button type="primary" v-permission="['sys:courseList:edit']" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
+                    <el-button type="danger" v-permission="['sys:courseList:delete']" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>
+                    <el-button type="success" v-permission="['sys:courseList:join']" :icon="Edit" size="default" @click="joinBtn(scope.row)">Register</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -65,7 +66,7 @@ const { listParm,
     reFresh } = useTable()
 
 //Craete,edit
-const { addBtn, editBtn, deleteBtn, addRef } = useCurse(getList)
+const { addBtn, editBtn, deleteBtn, addRef, joinBtn } = useCurse(getList)
 
 </script>
 

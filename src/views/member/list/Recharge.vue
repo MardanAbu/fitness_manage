@@ -18,6 +18,9 @@ import useDialog from "@/hooks/useDialog";
 import { ElMessage, FormInstance } from "element-plus";
 import { reactive, ref } from "vue";
 import { rechargeApi } from "@/api/member/index";
+import { userStore } from "@/store/user";
+
+const store = userStore()
 
 const addFormRef = ref<FormInstance>();
 
@@ -71,6 +74,7 @@ const emits = defineEmits(['refresh'])
 const commit = () => {
     addFormRef.value?.validate(async (valid) => {
         if (valid) {
+            addModel.userId = store.getUserId
             let res = await rechargeApi(addModel);
             if (res && res.code == 200) {
                 ElMessage.success(res.msg)

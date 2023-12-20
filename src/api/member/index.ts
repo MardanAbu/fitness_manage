@@ -1,5 +1,5 @@
 import http from "@/http"
-import { ApplyCard, MemberParm, MemberType, Recharge } from "./MemberModel"
+import { ApplyCard, MemberParm, MemberRecharge, MemberType, Recharge } from "./MemberModel"
 
 //Create
 export const addApi = (parm:MemberType)=>{
@@ -39,4 +39,9 @@ export const rechargeApi = (parm:Recharge)=>{
 //Membership list
 export const getCardListApi = ()=>{
     return http.get("/api/member/getCardList")
+}
+
+//My recharge
+export const getMyRechargeApi = (parm:MemberRecharge)=>{
+    return http.get("/api/member/getMyRecharge",parm)
 }

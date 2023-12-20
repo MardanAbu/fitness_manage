@@ -26,9 +26,9 @@
                     <el-col :span="12" :offset="0">
                         <el-form-item prop="teacherName" label="Coach">
                             <el-select style="width:100%;" v-model="addModel.teacherName" class="m-2"
-                                placeholder="Choose a coach" size="default">
+                                placeholder="Choose a coach" size="default" @change="selectTeach">
                                 <el-option v-for="item in teacherData.list" :key="item.label" :label="item.label"
-                                    :value="item.label" />
+                                    :value="{value:item.value, label:item.label}" />
                             </el-select>
                         </el-form-item>
                     </el-col>
@@ -187,6 +187,7 @@ const addModel = reactive<CourseType>({
     courseName: '',
     image: '',
     teacherName: '',
+    teacherId: '',
     courseHour: 0,
     courseDetails: '',
     coursePrice: 0
@@ -274,6 +275,13 @@ const commit = () => {
             }
         }
     })
+};
+
+//select coach's change
+const selectTeach = (val:any) =>{
+    console.log(val)
+    addModel.teacherId = val.value;
+    addModel.teacherName = val.label;
 }
 
 </script>

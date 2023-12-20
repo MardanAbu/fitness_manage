@@ -14,7 +14,7 @@
       <el-form-item>
         <el-button :icon="Search" @click="searchBtn">Search</el-button>
         <el-button :icon="Close" type="danger" plain @click="resetBtn">Reset</el-button>
-        <el-button :icon="Plus" type="primary" @click="addBtn">Create</el-button>
+        <el-button :icon="Plus" v-permission="['sys:memberList:add']" type="primary" @click="addBtn">Create</el-button>
       </el-form-item>
     </el-form>
 
@@ -47,10 +47,10 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="Action" width="220" align="center">
+      <el-table-column v-if="global.$checkPermission(['sys:memberList:purchase','sys:memberList:edit','sys:memberList:delete'])" label="Action" width="220" align="center">
         <template #default="scope">
-          <el-button type="success" :icon="Edit" size="default" @click="joinBtn(scope.row)">Purchase</el-button>
-          <el-button type="primary">
+          <el-button type="success" v-if="global.$checkPermission(['sys:memberList:purchase'])" :icon="Edit" size="default" @click="joinBtn(scope.row)">Purchase</el-button>
+          <el-button type="primary" v-permission="['sys:memberList:recharge']">
             <el-dropdown>
               <span class="el-dropdown-link" style="color:#FFF">
                 More
@@ -60,9 +60,9 @@
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item :icon="ChatLineSquare" @click="rechargeBtn(scope.row)">Recharge</el-dropdown-item>
-                  <el-dropdown-item :icon="Edit" @click="editBtn(scope.row)">Edit</el-dropdown-item>
-                  <el-dropdown-item type="danger" :icon="Delete" @click="deleteBtn(scope.row)">Delete</el-dropdown-item>
+                  <el-dropdown-item v-if="rechargeFlg" :icon="ChatLineSquare" @click="rechargeBtn(scope.row)">Recharge</el-dropdown-item>
+                  <el-dropdown-item v-if="editFlag" :icon="Edit" @click="editBtn(scope.row)">Edit</el-dropdown-item>
+                  <el-dropdown-item v-if="deleteFlg" type="danger" :icon="Delete" @click="deleteBtn(scope.row)">Delete</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -96,6 +96,10 @@ import JoinApply from "./JoinApply.vue";
 import useJoin from "@/composables/member/useJoin";
 import useRecharge from "@/composables/member/useRecharge";
 import Recharge from "./Recharge.vue";
+import useInstance from "@/hooks/useInstance";
+import { ref } from "vue";
+
+const { global } = useInstance()
 
 //表哥相关
 const { listParm, getList, searchBtn, resetBtn, tableList, sizeChange, currentChange, refresh, tableHeight } = useTable()
@@ -108,5 +112,16 @@ const { joinRef, joinBtn } = useJoin()
 
 //Recharge
 const { rechargeRef, rechargeBtn } = useRecharge();
+
+//按钮的初始值
+const rechargeFlg = ref(false);
+const editFlag = ref(false);
+const deleteFlg = ref(false);
+const vChange = ()=>{
+  editFlag.value = global.$checkPermission(['sys:memberList:edit'])
+  deleteFlg.value = global.$checkPermission(['sys:memberList:delete'])
+  rechargeFlg.value = global.$checkPermission(['sys:memberList:purchase'])
+
+}
 </script>
 <style scoped ></style>

@@ -11,7 +11,7 @@
         <el-form-item>
           <el-button @click="searchBtn" :icon="Search">Search</el-button>
           <el-button @click="resetBtn" type="danger" plain :icon="Close">Reset</el-button>
-          <el-button type="primary" @click="addBtn" :icon="Plus">Create</el-button>
+          <el-button type="primary" v-permission="['sys:user:add']" @click="addBtn" :icon="Plus">Create</el-button>
         </el-form-item>
       </el-form>
 
@@ -43,8 +43,8 @@
 
       <el-table-column label="" align="center" width="220">
         <template #default="scope">
-          <el-button type="primary" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
-          <el-button type="danger" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>          
+          <el-button type="primary" v-permission="['sys:user:edit']" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
+          <el-button type="danger" v-permission="['sys:user:delete']" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>          
         </template>
       </el-table-column>
       </el-table>

@@ -10,6 +10,10 @@ import 'element-plus/dist/index.css'
 //icon
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
+//引入按钮权限
+import { permission } from './directives/permission'
+import checkPermission from './directives/checkPermission'
+
 //import pinia
 import { createPinia } from 'pinia'
 
@@ -25,6 +29,7 @@ import objCopy from './utils/objCopy'
 const app = createApp(App);
 app.use(router).use(ElementPlus).use(pinia)
 app.mount('#app') 
+app.directive('permission', permission)
 
 //register icons globaly
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -34,6 +39,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 //global mount
 app.config.globalProperties.$myconfirm =  myconfirm
 app.config.globalProperties.$objCopy =  objCopy
+app.config.globalProperties.$checkPermission = checkPermission
 
 import piniaPersist from 'pinia-plugin-persist'
 

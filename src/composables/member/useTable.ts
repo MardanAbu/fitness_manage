@@ -1,8 +1,11 @@
 import { MemberParm } from "@/api/member/MemberModel";
 import { nextTick, onMounted, reactive, ref } from "vue";
 import { getListApi } from "@/api/member";
+import { userStore } from "@/store/user";
 
 export default function useTable() {
+
+    const store = userStore()
 
     //table height
     const tableHeight = ref(0)
@@ -19,10 +22,14 @@ export default function useTable() {
         username: '',
         pageSize: 10,
         currentPage: 1,
-        total: 0
+        total: 0,
+        userType:'',
+        memberId:''
     })
     //List
     const getList = async () => {
+        listParm.memberId = store.getUserId
+        listParm.userType = store.getUserType
         let res = await getListApi(listParm)
         if (res && res.code == 200) {
             console.log(res)

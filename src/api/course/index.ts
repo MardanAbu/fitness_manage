@@ -1,5 +1,5 @@
 import http from "@/http";
-import { CourseListParm, CourseType } from "./CourseModel";
+import { CourseListParm, CourseType, SelectCourse, MyCourseListParm } from "./CourseModel";
 
 //Image uploading
 export const uploadImageApi = (parm: object) => {
@@ -29,4 +29,14 @@ export const editApi = (parm:CourseType)=>{
 //Delete
 export const deleteApi = (courseId:string)=>{
     return http.delete(`/api/course/${courseId}`)
+}
+
+//选课
+export const joinCourseApi = (parm:SelectCourse)=>{
+    return http.post("/api/course/joinCourse",parm)
+}
+
+//我的课程
+export const getMyCourseListApi = (parm:MyCourseListParm)=>{
+    return http.get("/api/course/getMyCourseList",parm)
 }

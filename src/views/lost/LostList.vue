@@ -9,7 +9,7 @@
             <el-form-item>
                 <el-button :icon="Search" @click="searchBtn">Search</el-button>
                 <el-button type="danger" plain :icon="Close" @click="resetBtn">Reset</el-button>
-                <el-button :icon="Plus" type="primary" @click="addBtn">Add</el-button>
+                <el-button :icon="Plus" type="primary" @click="addBtn" v-permission="['sys:lostList:add']">Add</el-button>
             </el-form-item>
         </el-form>
 
@@ -29,9 +29,9 @@
             </el-table-column>
             <el-table-column label="Actions" align="center" width="350">
                 <template #default="scope">
-                    <el-button type="primary" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
-                    <el-button type="danger" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>
-                    <el-button type="success" :icon="Edit" size="default" @click="lostBtn(scope.row)">Returned</el-button>
+                    <el-button type="primary" v-permission="['sys:lostList:edit']" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
+                    <el-button type="danger" v-permission="['sys:lostList:delete']" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>
+                    <el-button type="success" v-permission="['sys:lostList:returned']" :icon="Edit" size="default" @click="lostBtn(scope.row)">Returned</el-button>
                 </template>
             </el-table-column>
         </el-table>

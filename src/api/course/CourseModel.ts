@@ -11,7 +11,19 @@ export type CourseType = {
     courseName:string,
     image:string,
     teacherName:string,
+    teacherId:string,
     courseHour:number,
     courseDetails:string,
     coursePrice:number
+}
+export type SelectCourse = {
+    courseId:string,
+    memberId:string
+}
+export type MyCourseListParm = {
+    userType:string,
+    userId:string,
+    currentPage:number,
+    pageSize:number,
+    total:number
 }

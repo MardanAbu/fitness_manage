@@ -9,7 +9,7 @@
             <el-form-item>
                 <el-button :icon="Search" @click="searchBtn">Search</el-button>
                 <el-button :icon="Close" type="danger" plain @click="resetBtn">Reset</el-button>
-                <el-button :icon="Plus" type="primary" @click="addBtn">Create</el-button>
+                <el-button :icon="Plus" v-permission="['sys:suggestList:add']" type="primary" @click="addBtn">Create</el-button>
             </el-form-item>
         </el-form>
 
@@ -19,8 +19,8 @@
             <el-table-column prop="content" label="Content"></el-table-column>
             <el-table-column label="Actions" align="center" width="250">
                 <template #default="scope">
-                    <el-button type="primary" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
-                    <el-button type="danger" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>
+                    <el-button type="primary" v-permission="['sys:suggestList:edit']" :icon="Edit" size="default" @click="editBtn(scope.row)">Edit</el-button>
+                    <el-button type="danger" v-permission="['sys:suggestList:delete']" :icon="Delete" size="default" @click="deleteBtn(scope.row)">Delete</el-button>
                 </template>
             </el-table-column>
         </el-table>

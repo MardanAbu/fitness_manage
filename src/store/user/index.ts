@@ -8,7 +8,8 @@ export const userStore = defineStore('userStore', {
             userId: '',
             token: '',
             userType: '',
-            codeList: []
+            codeList: [],
+            name:''
         }
     },
     getters: {
@@ -20,6 +21,9 @@ export const userStore = defineStore('userStore', {
         },
         getUserType(state){
             return state.userType
+        },
+        getCodeList(state){
+            return state.codeList
         }
     },
     actions: {
@@ -34,9 +38,10 @@ export const userStore = defineStore('userStore', {
         },
         getInfo() {
             return new Promise((resolve, reject) => {
-                getInfoApi({ userType: this.userType, userId: this.userId }).then((res) => {
+                getInfoApi({userId: this.userId,  userType: this.userType}).then((res) => {
                     if (res && res.code == 200) {
-                        this.codeList = res.data.permissons
+                        this.codeList = res.data.permissions//之前的bug，permissions写错，和后端不一致，导致codeList是空的，判断按钮permission的时候就会报错
+                        this.name = res.data.name
                     }
                     resolve(this.codeList)
                 }).catch((error) => {
@@ -49,7 +54,7 @@ export const userStore = defineStore('userStore', {
     persist: {
         enabled: true,  //开启持久化操作,默认全部字段存储，存储在sessionSotrage里面
         strategies: [
-            { storage: localStorage, paths: ['userId', 'token'] },
+            { storage: localStorage, paths: ['userId', 'token', 'codeList', 'name', 'userType'] },
         ],
     }
 })

@@ -5,7 +5,9 @@ export type MemberParm = {
     username: string,
     currentPage: number,
     pageSize: number,
-    total: number
+    total: number,
+    userType: string,
+    memberId: string
 }
 
 //member type
@@ -37,4 +39,12 @@ export type Recharge = {
     memberId:string,
     money:number,
     userId:string
+}
+
+export type MemberRecharge = {
+    currentPage:number,
+    pageSize:number,
+    total:number,
+    memberId:string,
+    userType:string
 }
