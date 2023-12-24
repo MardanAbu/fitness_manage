@@ -6,7 +6,7 @@ const config = {
     //requested address by interface
     baseURL:process.env.BASE_API,
     timeout:10000,
-    withCredentials: true //解决sesson不一致的问题
+    withCredentials: true //解决session不一致的问题
 }
 
 //return type

@@ -9,6 +9,11 @@ export const constantRoutes: Array<RouteRecordRaw> = [
     name: "login"
   },
   {
+    path: "/scan",
+    component: () => import('@/views/scan/index.vue'),
+    name: "scan"
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',

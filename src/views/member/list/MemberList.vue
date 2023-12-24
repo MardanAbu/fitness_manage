@@ -47,10 +47,13 @@
         </template>
       </el-table-column>
 
-      <el-table-column v-if="global.$checkPermission(['sys:memberList:purchase','sys:memberList:edit','sys:memberList:delete'])" label="Action" width="220" align="center">
+      <!-- v-if="global.$checkPermission(['sys:memberList:purchase','sys:memberList:edit','sys:memberList:delete'])" -->
+
+      <el-table-column label="Action" width="220" align="center">
         <template #default="scope">
-          <el-button type="success" v-if="global.$checkPermission(['sys:memberList:purchase'])" :icon="Edit" size="default" @click="joinBtn(scope.row)">Purchase</el-button>
-          <el-button type="primary" v-permission="['sys:memberList:recharge']">
+          <el-button type="success"  :icon="Edit" size="default" @click="joinBtn(scope.row)">Purchase</el-button>
+          <!-- v-if="global.$checkPermission(['sys:memberList:purchase'])" -->
+          <el-button type="primary">
             <el-dropdown>
               <span class="el-dropdown-link" style="color:#FFF">
                 More
@@ -60,9 +63,9 @@
               </span>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item v-if="rechargeFlg" :icon="ChatLineSquare" @click="rechargeBtn(scope.row)">Recharge</el-dropdown-item>
-                  <el-dropdown-item v-if="editFlag" :icon="Edit" @click="editBtn(scope.row)">Edit</el-dropdown-item>
-                  <el-dropdown-item v-if="deleteFlg" type="danger" :icon="Delete" @click="deleteBtn(scope.row)">Delete</el-dropdown-item>
+                  <el-dropdown-item :icon="ChatLineSquare" @click="rechargeBtn(scope.row)">Recharge</el-dropdown-item>
+                  <el-dropdown-item :icon="Edit" @click="editBtn(scope.row)">Edit</el-dropdown-item>
+                  <el-dropdown-item type="danger" :icon="Delete" @click="deleteBtn(scope.row)">Delete</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -114,14 +117,14 @@ const { joinRef, joinBtn } = useJoin()
 const { rechargeRef, rechargeBtn } = useRecharge();
 
 //按钮的初始值
-const rechargeFlg = ref(false);
-const editFlag = ref(false);
-const deleteFlg = ref(false);
-const vChange = ()=>{
-  editFlag.value = global.$checkPermission(['sys:memberList:edit'])
-  deleteFlg.value = global.$checkPermission(['sys:memberList:delete'])
-  rechargeFlg.value = global.$checkPermission(['sys:memberList:purchase'])
+// const rechargeFlg = ref(false);
+// const editFlag = ref(false);
+// const deleteFlg = ref(false);
+// const vChange = ()=>{
+//   editFlag.value = global.$checkPermission(['sys:memberList:edit'])
+//   deleteFlg.value = global.$checkPermission(['sys:memberList:delete'])
+//   rechargeFlg.value = global.$checkPermission(['sys:memberList:purchase'])
 
-}
+// }
 </script>
 <style scoped ></style>

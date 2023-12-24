@@ -19,7 +19,7 @@ import { createPinia } from 'pinia'
 
 //instantiate Pinia
 const pinia = createPinia()
-//使用持久化插件
+//使用持久化插件, persistence plugins
 pinia.use(piniaPersist)
 
 //data confirm

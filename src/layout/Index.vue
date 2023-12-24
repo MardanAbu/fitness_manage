@@ -22,6 +22,7 @@ import { ref ,reactive} from 'vue'
 <style lang="scss">
 .layout {
   height: 100%;
+  width: 100%;
   .asside {
     // background-color: blueviolet;
     background-color: #304156;
@@ -31,9 +32,10 @@ import { ref ,reactive} from 'vue'
     align-items: center;
     justify-content: space-between;
     background-color: #009688;
+    width: 100%;
   }
   .main {
-
+    width: 100%;
   }
 }
 </style>

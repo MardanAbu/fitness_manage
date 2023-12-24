@@ -128,6 +128,7 @@ const onSubmit = async () => {
     padding: 20px 35px;
 
     .loginTitle {
+      color: #010000;
       width: 100%;
       font-size: 24px;
       font-weight: 600;

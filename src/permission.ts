@@ -3,7 +3,7 @@ import { userStore } from '@/store/user/index'
 import { menuStore } from "./store/menu";
 
 //白名单
-const whiteList = ['/login']
+const whiteList = ['/login','/scan']
 //全局守卫路由
 router.beforeEach(async(to, from, next) => {
     //用户store
