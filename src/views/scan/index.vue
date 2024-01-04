@@ -37,22 +37,22 @@
   const getCameras = () => {
     Html5Qrcode.getCameras()
         .then((devices: CameraDevice[]) => {
-          console.log('摄像头信息', devices);
+          console.log('Camera Information', devices);
           if (devices && devices.length) {
-            // 如果有2个摄像头，1为前置的
+            // If there are 2 cameras, 1 is the front
             if (devices.length > 1) {
               cameraId.value = devices[1].id;
             } else {
               cameraId.value = devices[0].id;
             }
             devicesInfo.value = devices;
-            // start开始扫描
+            // start scan
             start();
           }
         })
         .catch((err) => {
           // handle err
-          console.log('获取设备信息失败', err); // 获取设备信息失败
+          console.log('Failed to get device information', err); 
         });
   };
   const start = () => {
@@ -61,18 +61,18 @@
         .start(
             cameraId.value, // retreived in the previous step.
             {
-              fps: 0.5, // 设置每秒多少帧
-              qrbox: {width: 250, height: 250}, // 设置取景范围
+              fps: 0.5, // Set how many frames per second
+              qrbox: {width: 400, height: 400}, // Setting the viewfinder range
               // scannable, rest shaded.
             },
             (decodedText: string, decodedResult: Html5QrcodeResult) => {
-              console.log('扫描的结果', decodedText, decodedResult);
+              console.log('Result of scan', decodedText, decodedResult);
               enter(decodedText).then(res => {
-                ElMessage.success("成功进入健身房!");
+                ElMessage.success("Scan success!");
               })
             },
             (errorMessage: any) => {
-              console.log('暂无额扫描结果', errorMessage);
+              console.log('No result', errorMessage);
             }
         )
         .catch((err: any) => {
@@ -110,10 +110,3 @@
     transform: translateY(-50%);
   }
   </style>
-  
-  
-  
-  
-  
-  
-  

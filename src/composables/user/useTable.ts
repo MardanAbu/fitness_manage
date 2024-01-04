@@ -10,7 +10,8 @@ export default function useTable() {
     const tableList = reactive({
         list: []
     })
-    //Searching arg
+
+    //Searching args
     const listParm = reactive<ListParm>({
         phone: '',
         pageSize: 10,
@@ -18,14 +19,15 @@ export default function useTable() {
         name: '',
         total: 0
     })
+
     //List
     const getList = async () => {
         let res = await getListApi(listParm)
         if (res && res.code == 200) {
-            //设置表格的数据
+            //set data in table
             console.log(res.data)
             tableList.list = res.data.records
-            //设置分页总条数
+            //set total number for pagination
             listParm.total = res.data.total
         }
     }
@@ -42,13 +44,13 @@ export default function useTable() {
         getList()
     }
 
-    //页容量改变时触发
+    // Triggered when the page size changes
     const sizeChange = (size: number) => {
         listParm.pageSize = size;
         getList()
     }
 
-    //页数改变时触发
+    // Triggered when the page number changes
     const currentChange = (page: number) => {
         listParm.currentPage = page;
         getList()

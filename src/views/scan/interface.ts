@@ -52,9 +52,3 @@ export interface Html5QrcodeResult {
     decodedText: string;
     result: QrcodeResult;
 }
-
-
-
-
-
-

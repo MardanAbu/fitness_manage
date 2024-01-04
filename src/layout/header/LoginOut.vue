@@ -1,4 +1,5 @@
 <template>
+  <div class="logout-button">
     <el-dropdown>
       <span class="el-dropdown-link">
         <img class="userimg" src="@/assets/user.png" />
@@ -9,6 +10,7 @@
         </el-dropdown-menu>
       </template>
     </el-dropdown>
+  </div>
   </template>
   
   <script setup lang="ts">
@@ -33,6 +35,10 @@
     height: 38px;
     width: 38px;
     border-radius: 50%;
+  }
+
+  .logout-button{
+    margin-left: auto; 
   }
   </style>
   
